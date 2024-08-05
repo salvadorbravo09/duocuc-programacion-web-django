@@ -1,0 +1,38 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Perfil{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+  <div class="row">
+    <h3 class="text-center mx-auto">Bienvenido <span class="text-capitalize">{{request.user}}</span></h3>
+    <div class="col-12 d-flex justify-content-center mt-3">
+      <ul class="list-unstyled">
+        <li class="d-inline-block me-3"><a href="{% url 'perfil' %}" class="btn btn-secondary">Registrar Nueva Direccion</a></li>
+        <li class="d-inline-block"><a href="{% url 'direcciones' %}" class="btn btn-success">Direcciones Guardadas</a></li>
+      </ul>
+    </div>
+    <div class="col-sm-8 offset-sm-1">
+      <form action="" method="post" novalidate>
+        {% csrf_token %}
+        {% for fm in form %}
+        <div class="form-group col-lg-6 mb-3">
+          {{fm.label_tag}} {{fm}} <small class="text-danger">{{fm.errors|striptags}}</small> <!-- renderiza la etiqueta del campo del formulario -->
+        </div>
+        {% endfor %}
+        <div class="col-12 mt-3">
+          <button type="submit" class="btn btn-primary mb-3">Guardar Direccion</button>
+        </div>
+      </form>
+      <!-- {% if messages %}
+      {% for message in messages %}
+      <div {% if message.tags %} class="alert alert-{{ message.tags }} my-5" {% else %} class="alert alert-info my-5"
+        {% endif %}>
+        {{ message }}
+      </div>
+      {% endfor %}
+      {% endif %} -->
+
+    </div>
+  </div>
+</div>
+{% endblock main-content %}

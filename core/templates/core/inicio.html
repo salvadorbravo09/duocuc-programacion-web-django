@@ -1,0 +1,236 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}Inicio{% endblock title %}
+
+{% block carrusel %}
+<!-- Carrusel -->
+<div id="hero-carousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="0" class="active" aria-current="true"
+      aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+
+  <div class="carousel-inner">
+    <div class="carousel-item active c-item">
+      <img src="{% static 'core/images/carusel/imagen-carusel-1.jpg' %}" class="d-block w-100 c-img" alt="Slide 1" />
+      <div class="carousel-caption top-0 mt-4">
+        <p class="mt-5 fs-3 text-uppercase">
+          Los mejores accesorios electronicos
+        </p>
+        <h1 class="display-1 fw-bolder text-capitalize">Al mejor precio</h1>
+      </div>
+    </div>
+    <div class="carousel-item c-item">
+      <img src="{% static 'core/images/carusel/imagen-carusel-2.jpg' %}" class="d-block w-100 c-img" alt="Slide 2" />
+      <div class="carousel-caption top-0 mt-4">
+        <p class="text-uppercase fs-3 mt-5">Ofertas todos los dias</p>
+        <p class="display-1 fw-bolder text-capitalize">
+          Productos con garantia
+        </p>
+      </div>
+    </div>
+    <div class="carousel-item c-item">
+      <img src="{% static 'core/images/carusel/imagen-carusel-3.jpg' %}" class="d-block w-100 c-img" alt="Slide 3" />
+      <div class="carousel-caption top-0 mt-4">
+        <p class="text-uppercase fs-3 mt-5">Las mejores marcas</p>
+        <p class="display-1 fw-bolder text-capitalize">
+          Productos Con Descuento
+        </p>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#hero-carousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Anterior</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#hero-carousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Despues</span>
+  </button>
+</div>
+{% endblock carrusel %}
+
+{% block main-content %}
+<!-- Card productos -->
+<div class="container">
+  <div class="row">
+    <div class="col-12 text-center pt-4">
+      <h1 class="display-4 text-center text-primary mt-3 fw-bold smaller-font">PRODUCTOS DISPONIBLES!</h1>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative">
+    <h2 style="color: #333; font-size: 24px; margin-bottom: 10px;">Audifonos</h2>
+    <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+      {% for a in audifonos %}
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <img src="{{a.imagen_producto.url}}" class="card-img-top" alt="..."/>
+          <div class="card-body">
+            <div class="clearfix mb-3">
+              <span class="float-start badge rounded-pill bg-primary">{{a.marca}}
+              </span>
+              <span class="float-end price-hp">{{a.precio_venta|intcomma}}&dollar;</span>
+            </div>
+            <h5 class="card-title">
+              {{a.titulo}}
+            </h5>
+            <div class="text-center my-4">
+              <a href="{% url 'detalle-producto' a.id %}" class="btn btn-warning">Ver Producto</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative">
+    <h2 style="color: #333; font-size: 24px; margin-bottom: 10px;">Laptop</h2>
+    <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+      {% for l in laptop %}
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <img src="{{l.imagen_producto.url}}" class="card-img-top" alt="..."/>
+          <div class="card-body">
+            <div class="clearfix mb-3">
+              <span class="float-start badge rounded-pill bg-primary">{{l.marca}}
+              </span>
+              <span class="float-end price-hp">{{l.precio_venta|intcomma}}&dollar;</span>
+            </div>
+            <h5 class="card-title">
+              {{l.titulo}}
+            </h5>
+            <div class="text-center my-4">
+              <a href="{% url 'detalle-producto' l.id %}" class="btn btn-warning">Ver Producto</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative">
+    <h2 style="color: #333; font-size: 24px; margin-bottom: 10px;">Telefonos</h2>
+    <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+      {% for m in mobiles %}
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <img src="{{m.imagen_producto.url}}" class="card-img-top" alt="..."/>
+          <div class="card-body">
+            <div class="clearfix mb-3">
+              <span class="float-start badge rounded-pill bg-primary">{{m.marca}}
+              </span>
+              <span class="float-end price-hp">{{m.precio_venta|intcomma}}&dollar;</span>
+            </div>
+            <h5 class="card-title">
+              {{m.titulo}}
+            </h5>
+            <div class="text-center my-4">
+              <a href="{% url 'detalle-producto' m.id %}" class="btn btn-warning">Ver Producto</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative">
+    <h2 style="color: #333; font-size: 24px; margin-bottom: 10px;">Teclados</h2>
+    <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+      {% for t in teclados %}
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <img src="{{t.imagen_producto.url}}" class="card-img-top" alt="..."/>
+          <div class="card-body">
+            <div class="clearfix mb-3">
+              <span class="float-start badge rounded-pill bg-primary">{{t.marca}}
+              </span>
+              <span class="float-end price-hp">{{t.precio_venta|intcomma}}</span>
+            </div>
+            <h5 class="card-title">
+              {{t.titulo}}
+            </h5>
+            <div class="text-center my-4">
+              <a href="{% url 'detalle-producto' t.id %}" class="btn btn-warning">Ver Producto</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="text-center text-lg-start bg-light text-muted">
+  <!-- Redes sociales -->
+  <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+    <!-- <div class="me-5 d-none d-lg-block">
+          <span>Te gustaria consultar el clima de tu ciudad?: <a href="">Click AQUI</a></span>
+        </div> -->
+
+    <div>
+      <span>Te gustaria consulta el clima de tu ciudad?</span>
+      <button class="btn btn-danger"><a class="text-white" href="{% url 'clima_api_rest' %}">Click AQUI</a></button>
+    </div>
+  </section>
+
+  <!-- Links -->
+  <section class="">
+    <div class="container text-center text-md-start mt-5">
+      <div class="row mt-3">
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          <h6 class="text-uppercase fw-bold mb-4">
+            <i class="fas fa-gem me-3"></i>Techno Shop
+          </h6>
+          <p>
+            Somos una tienda online de venta de accesorios tecnologicos.
+            <br />
+            <strong>Trabajamos con las mejores Marcas.</strong>
+          </p>
+        </div>
+
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">Productos</h6>
+          <p>
+            <a href="{% url 'audifono' %}" class="text-reset">Audifonos</a>
+          </p>
+          <p>
+            <a href="{% url 'laptop' %}" class="text-reset">Laptop</a>
+          </p>
+          <p>
+            <a href="{% url 'telefono' %}" class="text-reset">Celulares</a>
+          </p>
+          <p>
+            <a href="{% url 'teclado' %}" class="text-reset">Teclados</a>
+          </p>
+        </div>
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">Contacto</h6>
+          <p><i class="fas fa-home me-3"></i> DUOC UC, CONCEPCION</p>
+          <p>
+            <i class="fas fa-envelope me-3"></i>
+            sa.bravo@duocuc.cl
+          </p>
+          <p><i class="fas fa-phone me-3"></i> + 569 87336034</p>
+          <p><i class="fas fa-phone me-3"></i> + 569 87336034</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <hr />
+</footer>
+{% endblock main-content %}
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Direcciones{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+  <div class="row">
+    <h3 class="text-center mx-auto">Bienvenido <span class="text-capitalize">{{request.user}}</span></h3>
+    <div class="col-12 d-flex justify-content-center mt-3">
+      <ul class="list-unstyled">
+        <li class="d-inline-block me-3"><a href="{% url 'perfil' %}" class="btn btn-secondary">Registrar Nueva Direccion</a></li>
+        <li class="d-inline-block"><a href="{% url 'direcciones' %}" class="btn btn-success">Direcciones Guardadas</a></li>
+      </ul>
+    </div>
+    <div class="col-sm-9 my-3">
+      <div class="row">
+        {% for ag in agregar %}
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h3>Direccion {{forloop.counter}}</h3> <!-- Itera sobre cada direccion añadida, por lo que se va aumentando en uno -->
+              <p>Nombre: {{ag.nombre}}</p>
+              <p>Comuna: {{ag.localidad}}</p>
+              <p>Ciudad: {{ag.ciudad}}</p>
+              <p>Region: {{ag.region}}</p>
+              <p>Codigo Postal: {{ag.codigo_postal}}</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock main-content %}

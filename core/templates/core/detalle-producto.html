@@ -1,0 +1,145 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Detalle Producto{% endblock title %}
+{% load humanize %}
+{% block main-content %}
+<style>
+  .text-bold {
+    font-weight: 800;
+  }
+
+  text-color {
+    color: #0093c4;
+  }
+
+  /* Main image - left */
+  .main-img img {
+    width: 100%;
+  }
+
+  /* Preview images */
+  .previews img {
+    width: 100%;
+    height: 140px;
+  }
+
+  .main-description .category {
+    text-transform: uppercase;
+    color: #0093c4;
+  }
+
+  .main-description .product-title {
+    font-size: 2.5rem;
+  }
+
+  .old-price-discount {
+    font-weight: 600;
+  }
+
+  .new-price {
+    font-size: 2rem;
+  }
+
+  .details-title {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #757575;
+  }
+
+  .buttons .block {
+    margin-right: 5px;
+  }
+
+  .quantity input {
+    border-radius: 0;
+    height: 40px;
+
+  }
+
+  .similar-product img {
+    height: 400px;
+  }
+
+  .similar-product {
+    text-align: left;
+  }
+
+  .similar-product .title {
+    margin: 17px 0px 4px 0px;
+  }
+
+  .similar-product .price {
+    font-weight: bold;
+  }
+
+  .questions .icon i {
+    font-size: 2rem;
+  }
+
+  .questions-icon {
+    font-size: 2rem;
+    color: #0093c4;
+  }
+
+
+  /* Small devices (landscape phones, less than 768px) */
+  @media (max-width: 767.98px) {
+
+    /* Make preview images responsive  */
+    .previews img {
+      width: 100%;
+      height: auto;
+    }
+
+  }
+</style>
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-5">
+      <div class="main-img">
+        <img class="img-fluid" src="{{producto.imagen_producto.url}}" alt="ProductS">
+      </div>
+    </div>
+    <div class="col-md-7">
+      <div class="main-description px-2">
+        <div class="category text-bold">
+          Categoria: {{producto.categoria}}
+        </div>
+        <div class="category text-bold">
+          Marca: {{producto.marca}}
+        </div>
+        <div class="product-title text-bold my-3">
+          {{producto.titulo}}
+        </div>
+        <div class="price-area my-4">
+          <p class="new-price text-bold mb-1">${{producto.precio_venta|intcomma}}</p>
+        </div>
+        <div class="buttons d-flex my-5">
+          <div class="block">
+            <form action="/añadir-carrito" class="d-inline">
+              <input type="hidden" name="prod_id" value={{producto.id}} id="prod_id">
+              <button type="submit" class="btn btn-success shadow px-5 py-2">Añadir</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="product-details my-4">
+        <p class="details-title text-color mb-1">Descripcion</p>
+        <p class="description">{{producto.descripcion|linebreaksbr}}</p>
+      </div>
+
+      <div class="row questions bg-light p-3">
+        <div class="col-md-1 icon">
+          <i class="fa-brands fa-rocketchat questions-icon"></i>
+        </div>
+        <div class="col-md-11 text">
+          ¿Tiene alguna pregunta sobre nuestros productos? No dude en ponerse en contacto con nuestros representantes a través del formulario de contacto. <a class="btn btn-danger" href="{%url 'contacto'%}">Contacto</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+{% endblock main-content %}

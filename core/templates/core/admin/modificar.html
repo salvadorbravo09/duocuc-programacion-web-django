@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}Modificar Productos{% endblock title %}
+{% block main-content %}
+{% load crispy_forms_tags %}
+<div class="row">
+  <div class="col-12 col-md-6 offset-md-3">
+    <br>
+    <div class="card">
+      <div class="card-body">
+        <h2>Editar Producto</h2>
+        <hr>
+        <form action="" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{form | crispy}}
+
+          <div class="d-flex justify-content-end">
+            <input type="reset" value="Cancelar" class="btn btn-secondary">
+            &nbsp;
+            <input type="submit" value="Editar" class="btn btn-primary">
+          </div>
+        </form>
+        {{mensaje}}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock main-content %}

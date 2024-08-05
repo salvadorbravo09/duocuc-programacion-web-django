@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}Listar Pedidos{% endblock title %}
+{% block main-content %}
+<table class="table table-stripped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Cliente</th>
+      <th>Producto</th>
+      <th>Cantidad</th>
+      <th>Fecha de Pedido</th>
+      <th>Estado</th>
+      <th>Costo Total</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for pedido in pedidos %}
+    <tr>
+      <td>{{pedido.id}}</td>
+      <td>{{pedido.cliente.nombre}}</td>
+      <td>{{pedido.producto.titulo}}</td>
+      <td>{{pedido.cantidad}}</td>
+      <td>{{pedido.fecha_pedido}}</td>
+      <td>{{pedido.estado}}</td>
+      <td>{{pedido.costo_total|intcomma}}</td>
+      <td>
+        <form action="{% url 'eliminar_pedido' pedido.id %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock main-content %}

@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+{% block title %}Registro{% endblock title %}
+{% block main-content %}
+<div class="container">
+  <div class="row my-3">
+    <div class="col-sm-6 offset-sm-3">
+      <h3 class="text-center">Formulario de Registro</h3>
+      <hr>
+      <form action="" method="post" novalidate class="shadow p-5">
+        {% if messages %}
+        {% for mensaje in messages %}
+        <p {% if mensaje.tags %} class="alert alert-{{mensaje.tags}} mb-5" {% endif %}>{{mensaje}}</p>
+        {% endfor %}
+        {% endif %}
+        {% csrf_token %}
+        {% for fm in formulario %}
+        <div class="form-group mb-3">
+          {{fm.label_tag}} {{fm}} <small class="text-danger">{{fm.errors|striptags}}</small>
+        </div>
+        {% endfor %}
+        <input type="submit" value="Registrarse" class="btn btn-success">
+        <br>
+        {% if formulario.non_field_errors %}
+        {% for error in formulario.non_field_errors %}
+        <p class="alert alert-danger my-3">{{error}}</p>
+        {% endfor %}
+        {% endif %}
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock main-content %}

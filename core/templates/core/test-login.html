@@ -1,0 +1,30 @@
+{% extends 'core/base.html' %}
+{% block title %}Iniciar Sesion{% endblock title %}
+{% block main-content %}
+<div class="container">
+  <div class="row my-3">
+    <div class="col-sm-6 offset-sm-3">
+      <h3 class="text-center">Iniciar Sesión</h3>
+      <hr>
+      <form action="" method="post" novalidate class="shadow p-5">
+        {% csrf_token %}
+        {% for fm in form %}
+        <div class="mb-3">
+          <label for="{{ fm.id_for_label }}" class="form-label">{{ fm.label }}</label>
+          {{ fm }}
+          <small class="text-danger">{{ fm.errors }}</small>
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-success mt-4">Iniciar Sesión</button>
+        <br>
+        {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+        <p class="alert alert-danger my-3">{{ error }}</p>
+        {% endfor %}
+        {% endif %}
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
